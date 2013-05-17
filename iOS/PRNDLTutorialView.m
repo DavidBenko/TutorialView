@@ -22,9 +22,9 @@
 //
 //Created By David Benko on 5/15/2013
 
-#import "APTutorialView.h"
+#import "PRNDLTutorialView.h"
 
-@implementation APTutorialView
+@implementation PRNDLTutorialView
 
 - (id)initWithFrame:(CGRect)frame
 {

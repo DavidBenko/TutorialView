@@ -36,7 +36,7 @@
 #define DISMISS_ANIMATION_SPEED 0.5f
 #define TIP_FRAME_PADDING 15.0f
 
-@interface APTutorialView : UIView
+@interface PRNDLTutorialView : UIView
 
 -(void)drawArrowWithHead:(CGPoint)head andTail:(CGPoint)tail;
 -(void)drawArrowWithHead:(CGPoint)head andTail:(CGPoint)tail curved:(BOOL)curve;
