@@ -124,7 +124,6 @@
     CFRelease(line);
     
     UIBezierPath *path = [UIBezierPath bezierPath];
-    //[path moveToPoint:rect.origin];
     [path appendPath:[UIBezierPath bezierPathWithCGPath:letters]];
     
     CGPathRelease(letters);
@@ -137,7 +136,6 @@
     frame.origin.x = point.x - (frame.size.width / 2);
     frame.origin.y = point.y - (frame.size.height / 2);
     pathLayer.frame = frame;
-    //pathLayer.bounds = CGPathGetBoundingBox(path.CGPath);
     pathLayer.geometryFlipped = YES;
     pathLayer.path = path.CGPath;
     pathLayer.strokeColor = nil;
@@ -174,12 +172,8 @@
     
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, nil, head.x, head.y);
-    if(shouldCurve)
-        CGPathAddQuadCurveToPoint(path, nil, head.x, tail.y, tail.x, tail.y);
-        //CGPathAddArcToPoint(path, nil, head.x, tail.y, tail.x, tail.y, CIRCLE_RADIUS);
+    if(shouldCurve)CGPathAddQuadCurveToPoint(path, nil, head.x, tail.y, tail.x, tail.y);
     else CGPathAddLineToPoint(path, nil, tail.x, tail.y);
-    //CGPathMoveToPoint(path, nil, tail.x, tail.y);
-    //CGPathAddArcToPoint(path, nil, head.x, tail.y, head.x, head.y, CIRCLE_RADIUS);
     
     //Calculate Arrow Head
     CGPoint A = shouldCurve ? CGPointMake(head.x, tail.y) : tail;

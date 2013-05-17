@@ -31,7 +31,6 @@
 #define LINE_WIDTH 3.0f
 #define ARROW_HEAD_LENGTH(arrowLen) arrowLen / 8.5f
 #define ARROW_COLOR [[UIColor whiteColor] CGColor]
-#define CIRCLE_RADIUS 100.0f
 #define DRAW_ANIMATION_SPEED 0.4f
 #define DISMISS_ANIMATION_SPEED 0.5f
 #define TIP_FRAME_PADDING 15.0f
