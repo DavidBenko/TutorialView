@@ -36,38 +36,6 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    
-    CGPoint head = CGPointMake(290, 20);
-    CGPoint tail = CGPointMake(150, 150);
-    //[self drawArrowWithHead:head andTail:tail];
-    
-    head = CGPointMake(70, 300);
-    tail = CGPointMake(150, 150);
-    //[self drawArrowWithHead:head andTail:tail];
-    
-    head = CGPointMake(180, 300);
-    tail = CGPointMake(180, 10);
-    //[self drawArrowWithHead:head andTail:tail];
-    
-    head = CGPointMake(25, 100);
-    tail = CGPointMake(25, 150);
-    //[self drawArrowWithHead:head andTail:tail];
-    
-    head = CGPointMake(150, 180);
-    tail = CGPointMake(50, 180);
-    //[self drawArrowWithHead:head andTail:tail];
-    
-    head = CGPointMake(50, 330);
-    tail = CGPointMake(250, 330);
-    //[self drawArrowWithHead:head andTail:tail];
-    
-    head = CGPointMake(25, 25);
-    tail = CGPointMake(250, 330);
-    //[self drawArrowWithHead:head andTail:tail curved:NO animated:NO];
-    
-    [self createTipForRect:CGRectMake(290, -50, 50, 50) withMessage:@"Tap to start adding clincians" atPoint:CGPointMake(150, 150)];
-    
-    [self createTipForRect:CGRectMake(0, 350, 50, 50) withMessage:@"Go Home" atPoint:CGPointMake(200, 200)];
 }
 
 -(void)createTipForRect:(CGRect)rect withMessage:(NSString *)message atPoint:(CGPoint)center{
