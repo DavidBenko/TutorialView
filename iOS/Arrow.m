@@ -1,0 +1,88 @@
+
+
+#import "Arrow.h"
+
+@implementation Arrow
+
+@synthesize head,tail;
+@synthesize curved,animated;
+@synthesize description;
+@synthesize path;
+
+
+- (id) init
+{
+    self = [super init];
+    
+    if (self != nil)
+    {
+        self.head = CGPointMake(0, 0);
+        self.tail = CGPointMake(0, 0);
+        self.curved = true;
+        self.animated = true;
+        self.description = @"";
+        self.path = CGPathCreateMutable();
+    }
+    
+    return self;
+}
+-(void)setHead:(CGPoint)point{
+    head = point;
+    [self generatePath];
+}
+-(void)setHeadWithX:(CGFloat)x andY:(CGFloat)y {
+    self.head = CGPointMake(x, y);
+}
+-(void)setTail:(CGPoint)point{
+    tail = point;
+    [self generatePath];
+}
+-(void)setTailWithX:(CGFloat)x andY:(CGFloat)y {
+    self.tail = CGPointMake(x, y);
+}
+-(void)setCurved:(BOOL)shouldCurve {
+    curved = shouldCurve;
+    [self generatePath];
+}
+-(void)generatePath {
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    
+    BOOL shouldCurve = (self.head.x == self.tail.x || self.head.y == self.tail.y) ? NO : self.curved;
+    
+    CGPathMoveToPoint(path, nil, self.head.x, self.head.y);
+    if(shouldCurve)CGPathAddQuadCurveToPoint(path, nil, self.head.x, self.tail.y, self.tail.x, self.tail.y);
+    else CGPathAddLineToPoint(path, nil, self.tail.x, self.tail.y);
+    
+    //Calculate Arrow Head
+    CGPoint A = shouldCurve ? CGPointMake(self.head.x, self.tail.y) : self.tail;
+    CGPoint B = self.head;
+    
+    // Vector from A to B:
+    CGPoint AB = CGPointMake(B.x - A.x, B.y - A.y);
+    
+    // Length of AB == distance from A to B:
+    CGFloat d = hypotf(AB.x, AB.y);
+    
+    // Arrow size == distance from C to B.
+    CGFloat arrowSize = ARROW_HEAD_LENGTH(d);
+    
+    // Vector from C to B:
+    CGPoint CB = CGPointMake(AB.x * arrowSize/d, AB.y * arrowSize/d);
+    
+    // Compute P and Q:
+    CGPoint P = CGPointMake(B.x - CB.x - CB.y, B.y - CB.y + CB.x);
+    CGPoint Q = CGPointMake(B.x - CB.x + CB.y, B.y - CB.y - CB.x);
+    
+    CGPathMoveToPoint(path, nil, self.head.x, self.head.y);
+    CGPathAddLineToPoint(path, nil, P.x, P.y);
+    
+    CGPathMoveToPoint(path, nil, self.head.x, self.head.y);
+    CGPathAddLineToPoint(path, nil, Q.x, Q.y);
+    
+    self.path = path;
+    
+    //CGPathRelease(path);
+}
+
+@end

@@ -20,6 +20,9 @@
 		C390E65317474B2400CF3C8F /* PRNDLFlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C390E65217474B2400CF3C8F /* PRNDLFlipsideViewController.m */; };
 		C390E65617474B2400CF3C8F /* PRNDLMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C390E65417474B2400CF3C8F /* PRNDLMainViewController.xib */; };
 		C390E65917474B2400CF3C8F /* PRNDLFlipsideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C390E65717474B2400CF3C8F /* PRNDLFlipsideViewController.xib */; };
+		C3E6D2841753BCD400B837F9 /* TutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E6D2831753BCD400B837F9 /* TutorialView.m */; };
+		C3E6D2871753BCF700B837F9 /* Arrow.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E6D2861753BCF700B837F9 /* Arrow.m */; };
+		C3F307C21757DB5400F73CEB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F307C11757DB5400F73CEB /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +45,11 @@
 		C390E65217474B2400CF3C8F /* PRNDLFlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRNDLFlipsideViewController.m; sourceTree = "<group>"; };
 		C390E65517474B2400CF3C8F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PRNDLMainViewController.xib; sourceTree = "<group>"; };
 		C390E65817474B2400CF3C8F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PRNDLFlipsideViewController.xib; sourceTree = "<group>"; };
+		C3E6D2821753BCD400B837F9 /* TutorialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialView.h; path = ../TutorialView.h; sourceTree = "<group>"; };
+		C3E6D2831753BCD400B837F9 /* TutorialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialView.m; path = ../TutorialView.m; sourceTree = "<group>"; };
+		C3E6D2851753BCF700B837F9 /* Arrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Arrow.h; path = ../Arrow.h; sourceTree = "<group>"; };
+		C3E6D2861753BCF700B837F9 /* Arrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Arrow.m; path = ../Arrow.m; sourceTree = "<group>"; };
+		C3F307C11757DB5400F73CEB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3F307C21757DB5400F73CEB /* QuartzCore.framework in Frameworks */,
 				C390E63717474B2400CF3C8F /* UIKit.framework in Frameworks */,
 				C390E63917474B2400CF3C8F /* Foundation.framework in Frameworks */,
 				C390E63B17474B2400CF3C8F /* CoreGraphics.framework in Frameworks */,
@@ -61,6 +70,10 @@
 		C390E62A17474B2400CF3C8F = {
 			isa = PBXGroup;
 			children = (
+				C3E6D2821753BCD400B837F9 /* TutorialView.h */,
+				C3E6D2831753BCD400B837F9 /* TutorialView.m */,
+				C3E6D2851753BCF700B837F9 /* Arrow.h */,
+				C3E6D2861753BCF700B837F9 /* Arrow.m */,
 				C390E63C17474B2400CF3C8F /* TutorialViewSample */,
 				C390E63517474B2400CF3C8F /* Frameworks */,
 				C390E63417474B2400CF3C8F /* Products */,
@@ -78,6 +91,7 @@
 		C390E63517474B2400CF3C8F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C3F307C11757DB5400F73CEB /* QuartzCore.framework */,
 				C390E63617474B2400CF3C8F /* UIKit.framework */,
 				C390E63817474B2400CF3C8F /* Foundation.framework */,
 				C390E63A17474B2400CF3C8F /* CoreGraphics.framework */,
@@ -187,6 +201,8 @@
 				C390E64717474B2400CF3C8F /* PRNDLAppDelegate.m in Sources */,
 				C390E65017474B2400CF3C8F /* PRNDLMainViewController.m in Sources */,
 				C390E65317474B2400CF3C8F /* PRNDLFlipsideViewController.m in Sources */,
+				C3E6D2841753BCD400B837F9 /* TutorialView.m in Sources */,
+				C3E6D2871753BCF700B837F9 /* Arrow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +333,7 @@
 				C390E65E17474B2400CF3C8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
