@@ -23,19 +23,16 @@
 
 #import "TutorialView.h"
 
-#define IOS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
-
 @interface TutorialView ()
-
 @property (nonatomic,strong) NSMutableArray *arrows;
 @property (nonatomic, assign) CGMutablePathRef pathNoAnimation;
 @property (nonatomic, assign) CGMutablePathRef pathAnimated;
-
 @end
 
 @implementation TutorialView
 
 @synthesize arrows;
+@synthesize delegate;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -44,6 +41,7 @@
         // Initialization code
         [self setBackgroundColor:VIEW_COLOR];
         [self setAlpha:VIEW_ALPHA];
+        [self setDelegate:nil];
         arrows = [[NSMutableArray alloc]init];
         UITapGestureRecognizer *singleFingerTap =
         [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -61,12 +59,12 @@
     [self drawPath];
 }
 
--(void)layoutSubviews{
+- (void)layoutSubviews{
     [super layoutSubviews];
 }
 
 
--(CGPoint)getClosestPointInRect:(CGRect)rect toPoint:(CGPoint)point {
+- (CGPoint)getClosestPointInRect:(CGRect)rect toPoint:(CGPoint)point {
     CGFloat x_min = rect.origin.x;
     CGFloat y_min = rect.origin.y;
     CGFloat x_max = rect.origin.x + rect.size.width;
@@ -86,160 +84,123 @@
     return CGPointMake(close_x,close_y);
 }
 
--(void)addArrow:(Arrow *)arrow{
+- (void)addArrow:(Arrow *)arrow{
     //NSLog(@"Arrow Head: %@",NSStringFromCGPoint(arrow.head));
     //NSLog(@"Arrow Tail: %@",NSStringFromCGPoint(arrow.tail));
     [self.arrows addObject:arrow];
     [self generatePath];
     [self setNeedsDisplay];
 }
-
-/*-(void)drawText:(NSString *)text atPoint:(CGPoint)point{
-    // Create path from text
-    // See: http://www.codeproject.com/KB/iPhone/Glyph.aspx
-    // License: The Code Project Open License (CPOL) 1.02 http://www.codeproject.com/info/cpol10.aspx
-    CGMutablePathRef letters = CGPathCreateMutable();
+- (void)drawPath{
+    if (self.arrows.count < 1){
+        NSLog(@"TutorialView No Arrows to Draw!");
+        return;
+    };
     
-    CTFontRef font = CTFontCreateWithName(CFSTR("MarkerFelt-Wide"), 14.0f, NULL);
-    NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                           (__bridge id)font, kCTFontAttributeName,
-                           nil];
-    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:text
-                                                                     attributes:attrs];
-    CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)attrString);
-	CFArrayRef runArray = CTLineGetGlyphRuns(line);
+    bool drawAnimatedPath = true;
+    bool drawNonAnimatedPath = true;
     
-    // for each RUN
-    for (CFIndex runIndex = 0; runIndex < CFArrayGetCount(runArray); runIndex++)
-    {
-        // Get FONT for this run
-        CTRunRef run = (CTRunRef)CFArrayGetValueAtIndex(runArray, runIndex);
-        CTFontRef runFont = CFDictionaryGetValue(CTRunGetAttributes(run), kCTFontAttributeName);
-        
-        // for each GLYPH in run
-        for (CFIndex runGlyphIndex = 0; runGlyphIndex < CTRunGetGlyphCount(run); runGlyphIndex++)
-        {
-            // get Glyph & Glyph-data
-            CFRange thisGlyphRange = CFRangeMake(runGlyphIndex, 1);
-            CGGlyph glyph;
-            CGPoint position;
-            CTRunGetGlyphs(run, thisGlyphRange, &glyph);
-            CTRunGetPositions(run, thisGlyphRange, &position);
-            
-            // Get PATH of outline
-            {
-                CGPathRef letter = CTFontCreatePathForGlyph(runFont, glyph, NULL);
-                CGAffineTransform t = CGAffineTransformMakeTranslation(position.x, position.y);
-                CGPathAddPath(letters, &t, letter);
-                CGPathRelease(letter);
-            }
-        }
+    if(!CGPathIsEmpty(self.pathAnimated)){
+        if(self.delegate)
+            drawAnimatedPath = [self.delegate tutorialView:self shouldDrawPath:(CGPathRef)self.pathAnimated animated:true];
     }
-    CFRelease(line);
+    else drawAnimatedPath = false;
+            
+    if(!CGPathIsEmpty(self.pathNoAnimation)){
+        if(self.delegate)
+            drawNonAnimatedPath = [self.delegate tutorialView:self shouldDrawPath:(CGPathRef)self.pathNoAnimation animated:false];
+    }
+    else drawNonAnimatedPath = false;
     
-    UIBezierPath *path = [UIBezierPath bezierPath];
-    [path appendPath:[UIBezierPath bezierPathWithCGPath:letters]];
+    if (drawAnimatedPath) {
+        
+        /*
+         * Animated Arrows
+         */
+        
+        CAShapeLayer *pathLayer = [CAShapeLayer layer];
+        pathLayer.frame = self.bounds;
+        pathLayer.path = self.pathAnimated;
+        pathLayer.strokeColor = ARROW_COLOR;
+        pathLayer.fillColor = nil;
+        if (IOS_VERSION >= 6.0f) pathLayer.drawsAsynchronously = DRAWS_ASYNC;
+        pathLayer.lineWidth = LINE_WIDTH;
+        pathLayer.lineJoin = kCALineJoinBevel;
+        [self.layer addSublayer:pathLayer];
+        CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+        pathAnimation.duration = DRAW_ANIMATION_SPEED;
+        pathAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
+        pathAnimation.toValue = [NSNumber numberWithFloat:1.0f];
+        [pathLayer addAnimation:pathAnimation forKey:@"strokeEnd"];
+        
+        if(self.delegate) [self.delegate tutorialView:self didDrawPath:(CGPathRef)self.pathAnimated];
+    }
     
-    CGPathRelease(letters);
-    CFRelease(font);
-    
-    CAShapeLayer *pathLayer = [CAShapeLayer layer];
-    CGRect frame = CGPathGetBoundingBox(path.CGPath);
-    frame.size.width += TIP_FRAME_PADDING * 2;
-    frame.size.height += TIP_FRAME_PADDING * 2;
-    frame.origin.x = point.x - (frame.size.width / 2);
-    frame.origin.y = point.y - (frame.size.height / 2);
-    pathLayer.frame = frame;
-    pathLayer.geometryFlipped = YES;
-    pathLayer.path = path.CGPath;
-    pathLayer.strokeColor = nil;
-    pathLayer.fillColor = ARROW_COLOR;
-    pathLayer.shouldRasterize = YES;
-    pathLayer.lineWidth = LINE_WIDTH;
-    pathLayer.lineJoin = kCALineJoinBevel;
-    pathLayer.drawsAsynchronously = YES;
-    
-    [self.layer addSublayer:pathLayer];
-    
-    CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
-    pathAnimation.duration = DRAW_ANIMATION_SPEED;
-    pathAnimation.fromValue = @0.0f;
-    pathAnimation.toValue = @1.0f;
-    pathAnimation.fillMode = kCAFillModeForwards;
-    [pathLayer addAnimation:pathAnimation forKey:@"fillColorAnimation"];
-    
-}*/
-
--(void)drawPath{
-    //NSLog(@"Arrows: %d",self.arrows.count);
-    if (self.arrows.count < 1)return;
-    
-    /*
-     * Animated Arrows
-     */
-    
-    CAShapeLayer *pathLayer = [CAShapeLayer layer];
-    pathLayer.frame = self.bounds;
-    pathLayer.path = self.pathAnimated;
-    pathLayer.strokeColor = ARROW_COLOR;
-    pathLayer.fillColor = nil;
-    if (IOS_VERSION >= 6.0) pathLayer.drawsAsynchronously = YES;
-    pathLayer.lineWidth = LINE_WIDTH;
-    pathLayer.lineJoin = kCALineJoinBevel;
-    [self.layer addSublayer:pathLayer];
-    CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    pathAnimation.duration = DRAW_ANIMATION_SPEED;
-    pathAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
-    pathAnimation.toValue = [NSNumber numberWithFloat:1.0f];
-    [pathLayer addAnimation:pathAnimation forKey:@"strokeEnd"];
-
-    
-    
-    /*
-     * Non-Animated Arrows
-     */
-    
-    pathLayer = [CAShapeLayer layer];
-    pathLayer.frame = self.bounds;
-    pathLayer.path = self.pathNoAnimation;
-    pathLayer.strokeColor = ARROW_COLOR;
-    if (IOS_VERSION >= 6.0) pathLayer.drawsAsynchronously = YES;
-    pathLayer.fillColor = nil;
-    pathLayer.lineWidth = LINE_WIDTH;
-    pathLayer.lineJoin = kCALineJoinBevel;
-    [self.layer addSublayer:pathLayer];
+    if(drawNonAnimatedPath){
+        /*
+         * Non-Animated Arrows
+         */
+        
+        CAShapeLayer *pathLayer = [CAShapeLayer layer];
+        pathLayer.frame = self.bounds;
+        pathLayer.path = self.pathNoAnimation;
+        pathLayer.strokeColor = ARROW_COLOR;
+        if (IOS_VERSION >= 6.0f) pathLayer.drawsAsynchronously = DRAWS_ASYNC;
+        pathLayer.fillColor = nil;
+        pathLayer.lineWidth = LINE_WIDTH;
+        pathLayer.lineJoin = kCALineJoinBevel;
+        [self.layer addSublayer:pathLayer];
+        
+        if(self.delegate) [self.delegate tutorialView:self didDrawPath:(CGPathRef)self.pathNoAnimation];
+    }
     
 }
 
--(void)generatePath{
+- (void)generatePath{
     CGMutablePathRef pAnimated = CGPathCreateMutable();
     CGMutablePathRef pNoAnimated = CGPathCreateMutable();
     for(Arrow *a in self.arrows)
         CGPathAddPath(a.animated ? pAnimated : pNoAnimated, nil, a.path);
+    CGPathRelease(self.pathAnimated);
+    CGPathRelease(self.pathNoAnimation);
     self.pathAnimated = pAnimated;
     self.pathNoAnimation = pNoAnimated;
-    //CGPathRelease(pAnimated);
-    //CGPathRelease(pNoAnimated);
 }
--(void)dismissView{
-    [self dismissViewAnimated:YES];
+- (void)dismissView{
+    [self dismissViewAnimated:YES completion:nil];
 }
--(void)dismissViewAnimated:(BOOL)animated{
-    if(animated){
+- (void)dismissViewAnimated:(BOOL)animated completion:(void(^)(void))callback{
+    bool shouldAnimate = animated;
+    bool shouldDismiss = true;
+    if (self.delegate)shouldDismiss = [self.delegate tutorialView:self shouldDismissAnimated:&shouldAnimate];
+    if (!shouldDismiss) return;
+    
+    if(shouldAnimate){
         [UIView animateWithDuration:DISMISS_ANIMATION_SPEED
                               delay:0
                             options:UIViewAnimationOptionLayoutSubviews
                          animations:^{
-                             self.alpha = 0.0f;
+                            self.alpha = 0.0f;
                          }
                          completion:^(BOOL success){
-                             [self removeFromSuperview];
+                            [self removeFromSuperview];
+                            if(callback) callback();
+                            if(self.delegate)[self.delegate tutorialView:self didDismissAnimated:animated];
                          }
          ];
     }
     else{
         [self removeFromSuperview];
+        if(callback) callback();
+        if(self.delegate)[self.delegate tutorialView:self didDismissAnimated:animated];
     }
+}
+
+
+#pragma mark - Dealloc
+-(void)dealloc {
+    CGPathRelease(self.pathAnimated);
+    CGPathRelease(self.pathNoAnimation);
 }
 
 @end

@@ -17,9 +17,7 @@
 		C390E64B17474B2400CF3C8F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C390E64A17474B2400CF3C8F /* Default@2x.png */; };
 		C390E64D17474B2400CF3C8F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C390E64C17474B2400CF3C8F /* Default-568h@2x.png */; };
 		C390E65017474B2400CF3C8F /* PRNDLMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C390E64F17474B2400CF3C8F /* PRNDLMainViewController.m */; };
-		C390E65317474B2400CF3C8F /* PRNDLFlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C390E65217474B2400CF3C8F /* PRNDLFlipsideViewController.m */; };
 		C390E65617474B2400CF3C8F /* PRNDLMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C390E65417474B2400CF3C8F /* PRNDLMainViewController.xib */; };
-		C390E65917474B2400CF3C8F /* PRNDLFlipsideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C390E65717474B2400CF3C8F /* PRNDLFlipsideViewController.xib */; };
 		C3E6D2841753BCD400B837F9 /* TutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E6D2831753BCD400B837F9 /* TutorialView.m */; };
 		C3E6D2871753BCF700B837F9 /* Arrow.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E6D2861753BCF700B837F9 /* Arrow.m */; };
 		C3F307C21757DB5400F73CEB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F307C11757DB5400F73CEB /* QuartzCore.framework */; };
@@ -41,14 +39,11 @@
 		C390E64C17474B2400CF3C8F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C390E64E17474B2400CF3C8F /* PRNDLMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRNDLMainViewController.h; sourceTree = "<group>"; };
 		C390E64F17474B2400CF3C8F /* PRNDLMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRNDLMainViewController.m; sourceTree = "<group>"; };
-		C390E65117474B2400CF3C8F /* PRNDLFlipsideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRNDLFlipsideViewController.h; sourceTree = "<group>"; };
-		C390E65217474B2400CF3C8F /* PRNDLFlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRNDLFlipsideViewController.m; sourceTree = "<group>"; };
 		C390E65517474B2400CF3C8F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PRNDLMainViewController.xib; sourceTree = "<group>"; };
-		C390E65817474B2400CF3C8F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PRNDLFlipsideViewController.xib; sourceTree = "<group>"; };
-		C3E6D2821753BCD400B837F9 /* TutorialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialView.h; path = ../TutorialView.h; sourceTree = "<group>"; };
-		C3E6D2831753BCD400B837F9 /* TutorialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialView.m; path = ../TutorialView.m; sourceTree = "<group>"; };
-		C3E6D2851753BCF700B837F9 /* Arrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Arrow.h; path = ../Arrow.h; sourceTree = "<group>"; };
-		C3E6D2861753BCF700B837F9 /* Arrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Arrow.m; path = ../Arrow.m; sourceTree = "<group>"; };
+		C3E6D2821753BCD400B837F9 /* TutorialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialView.h; path = ../../TutorialView.h; sourceTree = "<group>"; };
+		C3E6D2831753BCD400B837F9 /* TutorialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialView.m; path = ../../TutorialView.m; sourceTree = "<group>"; };
+		C3E6D2851753BCF700B837F9 /* Arrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Arrow.h; path = ../../Arrow.h; sourceTree = "<group>"; };
+		C3E6D2861753BCF700B837F9 /* Arrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Arrow.m; path = ../../Arrow.m; sourceTree = "<group>"; };
 		C3F307C11757DB5400F73CEB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -67,13 +62,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C390E62A17474B2400CF3C8F = {
+		C323F161179AEB4000761E75 /* TutorialView */ = {
 			isa = PBXGroup;
 			children = (
 				C3E6D2821753BCD400B837F9 /* TutorialView.h */,
 				C3E6D2831753BCD400B837F9 /* TutorialView.m */,
 				C3E6D2851753BCF700B837F9 /* Arrow.h */,
 				C3E6D2861753BCF700B837F9 /* Arrow.m */,
+			);
+			name = TutorialView;
+			sourceTree = "<group>";
+		};
+		C323F162179AEB5300761E75 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C390E64E17474B2400CF3C8F /* PRNDLMainViewController.h */,
+				C390E64F17474B2400CF3C8F /* PRNDLMainViewController.m */,
+				C390E65417474B2400CF3C8F /* PRNDLMainViewController.xib */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		C390E62A17474B2400CF3C8F = {
+			isa = PBXGroup;
+			children = (
 				C390E63C17474B2400CF3C8F /* TutorialViewSample */,
 				C390E63517474B2400CF3C8F /* Frameworks */,
 				C390E63417474B2400CF3C8F /* Products */,
@@ -102,14 +114,10 @@
 		C390E63C17474B2400CF3C8F /* TutorialViewSample */ = {
 			isa = PBXGroup;
 			children = (
+				C323F161179AEB4000761E75 /* TutorialView */,
+				C323F162179AEB5300761E75 /* View Controllers */,
 				C390E64517474B2400CF3C8F /* PRNDLAppDelegate.h */,
 				C390E64617474B2400CF3C8F /* PRNDLAppDelegate.m */,
-				C390E64E17474B2400CF3C8F /* PRNDLMainViewController.h */,
-				C390E64F17474B2400CF3C8F /* PRNDLMainViewController.m */,
-				C390E65117474B2400CF3C8F /* PRNDLFlipsideViewController.h */,
-				C390E65217474B2400CF3C8F /* PRNDLFlipsideViewController.m */,
-				C390E65417474B2400CF3C8F /* PRNDLMainViewController.xib */,
-				C390E65717474B2400CF3C8F /* PRNDLFlipsideViewController.xib */,
 				C390E63D17474B2400CF3C8F /* Supporting Files */,
 			);
 			path = TutorialViewSample;
@@ -186,7 +194,6 @@
 				C390E64B17474B2400CF3C8F /* Default@2x.png in Resources */,
 				C390E64D17474B2400CF3C8F /* Default-568h@2x.png in Resources */,
 				C390E65617474B2400CF3C8F /* PRNDLMainViewController.xib in Resources */,
-				C390E65917474B2400CF3C8F /* PRNDLFlipsideViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +207,6 @@
 				C390E64317474B2400CF3C8F /* main.m in Sources */,
 				C390E64717474B2400CF3C8F /* PRNDLAppDelegate.m in Sources */,
 				C390E65017474B2400CF3C8F /* PRNDLMainViewController.m in Sources */,
-				C390E65317474B2400CF3C8F /* PRNDLFlipsideViewController.m in Sources */,
 				C3E6D2841753BCD400B837F9 /* TutorialView.m in Sources */,
 				C3E6D2871753BCF700B837F9 /* Arrow.m in Sources */,
 			);
@@ -223,14 +229,6 @@
 				C390E65517474B2400CF3C8F /* en */,
 			);
 			name = PRNDLMainViewController.xib;
-			sourceTree = "<group>";
-		};
-		C390E65717474B2400CF3C8F /* PRNDLFlipsideViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C390E65817474B2400CF3C8F /* en */,
-			);
-			name = PRNDLFlipsideViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

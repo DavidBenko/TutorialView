@@ -28,15 +28,27 @@
 
 #define VIEW_ALPHA 0.8f
 #define VIEW_COLOR [UIColor blackColor]
-#define LINE_WIDTH 3.0f
+#define LINE_WIDTH 3.
 #define ARROW_COLOR [[UIColor whiteColor] CGColor]
 #define DRAW_ANIMATION_SPEED 0.4f
 #define DISMISS_ANIMATION_SPEED 0.5f
-#define TIP_FRAME_PADDING 15.0f
+#define TIP_FRAME_PADDING 15.
+#define IOS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
+#define DRAWS_ASYNC true
+
+@class TutorialView;
+
+@protocol TutorialViewDelegate <NSObject>
+@optional
+- (BOOL)tutorialView:(TutorialView *)tutorialView shouldDismissAnimated:(bool *)animated;
+- (void)tutorialView:(TutorialView *)tutorialView didDismissAnimated:(BOOL)animated;
+- (BOOL)tutorialView:(TutorialView *)tutorialView shouldDrawPath:(CGPathRef)path animated:(BOOL)animated;
+- (void)tutorialView:(TutorialView *)tutorialView didDrawPath:(CGPathRef)path;
+@end 
 
 @interface TutorialView : UIView
-
--(void)addArrow:(Arrow *)arrow;
--(void)dismissViewAnimated:(BOOL)animated;
-
+@property (nonatomic, assign) id <TutorialViewDelegate> delegate;
+- (void)addArrow:(Arrow *)arrow;
+- (void)dismissViewAnimated:(BOOL)animated completion:(void(^)(void))callback;
 @end
+
