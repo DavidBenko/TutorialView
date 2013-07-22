@@ -3,24 +3,24 @@
   <component name="FacetManager">
     <facet type="android" name="Android">
       <configuration>
-        <option name="SELECTED_BUILD_VARIANT" value="debug" />
+        <option name="SELECTED_BUILD_VARIANT" value="Debug" />
         <option name="ASSEMBLE_TASK_NAME" value="assembleDebug" />
+        <option name="ASSEMBLE_TEST_TASK_NAME" value="assembleTest" />
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="GEN_FOLDER_RELATIVE_PATH_APT" value="/TutorialViewSample/build/source/aidl/debug" />
-        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/TutorialViewSample/src/main/AndroidManifest.xml" />
-        <option name="RES_FOLDER_RELATIVE_PATH" value="/TutorialViewSample/src/main/res" />
-        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/TutorialViewSample/src/main/assets" />
+        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
+        <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
+        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
       </configuration>
     </facet>
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
         <option name="GRADLE_PROJECT_PATH" value=":TutorialViewSample" />
-        <option name="PROJECT_ABSOLUTE_PATH" value="$MODULE_DIR$" />
-        <option name="GRADLE_HOME_DIR_PATH" />
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/TutorialViewSample/build/classes/debug" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/TutorialViewSample">
       <sourceFolder url="file://$MODULE_DIR$/TutorialViewSample/build/source/r/debug" isTestSource="false" />

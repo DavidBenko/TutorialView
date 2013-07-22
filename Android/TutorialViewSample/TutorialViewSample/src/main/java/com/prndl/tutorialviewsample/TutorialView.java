@@ -1,39 +1,17 @@
-//The MIT License (MIT)
-//
-//Copyright (c) 2013 PRNDL Development Studios, LLC
-//
-//Permission is hereby granted, free of charge, to any person obtaining a copy
-//of this software and associated documentation files (the "Software"), to deal
-//in the Software without restriction, including without limitation the rights
-//to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//copies of the Software, and to permit persons to whom the Software is
-//furnished to do so, subject to the following conditions:
-//
-//The above copyright notice and this permission notice shall be included in
-//all copies or substantial portions of the Software.
-//
-//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-//THE SOFTWARE.
-//
-//Created By David Benko on 5/20/2013
+
 
 package com.prndl.tutorialviewsample;
 
 import android.content.Context;
 import android.graphics.*;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.ArrayList;
 
 public class TutorialView extends android.app.Activity {
-    /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +19,13 @@ public class TutorialView extends android.app.Activity {
         Tutorial t = new Tutorial(this);
         Arrow a = new Arrow();
         a.setHead(new Point(100,100));
-        a.setTail(new Point(300,300));
+        a.setTail(new Point(300, 300));
         t.addArrow(a);
 
 
         a = new Arrow();
-        a.setHead(new Point(500,500));
-        a.setTail(new Point(200,200));
+        a.setHead(new Point(500, 700));
+        a.setTail(new Point(200, 400));
         a.setCurved(false);
         t.addArrow(a);
 
@@ -63,11 +41,11 @@ public class TutorialView extends android.app.Activity {
         public static final float LINE_WIDTH = 5.0f;
         public static final String ARROW_COLOR = "#FFFFFF";
         public static final float DRAW_ANIMATION_SPEED = 30.0f;
-        public static final float DISMISS_ANIMATION_SPEED = 0.5f;
         public static final float TIP_FRAME_PADDING = 15.0f;
 
         private static Paint paint;
-        private Path path;
+        private Path pathAnimated;
+        private Path pathNoAnimation;
         private Context context;
         float[] dashes = { 0.0f, Float.MAX_VALUE };
         private ArrayList<Arrow> arrows;
@@ -113,21 +91,44 @@ public class TutorialView extends android.app.Activity {
             generatePath();
         }
         private void generatePath(){
-            Path p = new Path();
-            for (Arrow a : this.arrows) {
-                p.addPath(a.getPath());
-            }
-            this.path = p;
+            Path pAnimated = new Path();
+            Path pNoAnimated = new Path();
+            for (Arrow a : this.arrows)
+                if(a.getAnimated()) pAnimated.addPath(a.getPath());
+                else pNoAnimated.addPath(a.getPath());
+
+            this.pathAnimated = pAnimated;
+            this.pathNoAnimation = pNoAnimated;
         }
 
         @Override
         public void onDraw(Canvas canvas) {
             super.onDraw(canvas);
-            // Animate the line drawing
-            dashes[0]+= DRAW_ANIMATION_SPEED;
-            paint.setPathEffect(new DashPathEffect(dashes, 0));
-            canvas.drawPath(path, paint);
-            invalidate();
+
+            if(this.arrows.isEmpty()){
+                Log.i("TutorialView","No Arrows to Draw!");
+                return;
+            }
+
+            /*
+             * Animated Arrows
+             */
+
+            if(!pathAnimated.isEmpty()){
+                dashes[0]+= DRAW_ANIMATION_SPEED;
+                paint.setPathEffect(new DashPathEffect(dashes, 0));
+                canvas.drawPath(pathAnimated, paint);
+                invalidate();
+            }
+
+            /*
+             * Non-Animated Arrows
+             */
+
+            if(!pathNoAnimation.isEmpty()){
+                paint.setPathEffect(null);
+                canvas.drawPath(pathNoAnimation,paint);
+            }
         }
 
         public void dismissView(Boolean animated){

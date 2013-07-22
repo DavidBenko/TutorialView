@@ -1,12 +1,12 @@
 # incremental data. DO NOT EDIT.
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
-1369270245000 4527 f2bad66e44678db68c1d68c8d8ac689de7b6331d /Users/davidbenko/AndroidStudioProjects/TutorialViewSample/TutorialViewSample/build/classes/debug/com/prndl/tutorialviewsample/TutorialView$Tutorial.class
+1374524702000 4884 4af083815554473f03ae4e77712515dbe2397776 /Users/davidbenko/AndroidStudioProjects/TutorialViewSample/TutorialViewSample/build/classes/debug/com/prndl/tutorialviewsample/TutorialView$Tutorial.class
 1369077763000 461 3e3fee3c8ff2a92d9d2a60c52d688b5e6caf5d35 /Users/davidbenko/AndroidStudioProjects/TutorialViewSample/TutorialViewSample/build/classes/debug/com/prndl/tutorialviewsample/R$style.class
 1369077693000 484258 bd6479f5dd592790607e0504e66e0f31c2b4d308 /Users/davidbenko/AndroidStudioProjects/TutorialViewSample/TutorialViewSample/libs/android-support-v4.jar
-1369258222000 2846 5980c50b04ad11ef685372985fe1fdd6cfe8ec32 /Users/davidbenko/AndroidStudioProjects/TutorialViewSample/TutorialViewSample/build/classes/debug/com/prndl/tutorialviewsample/Arrow.class
+1374524041000 3014 5c303d346885b9f23d014e492b887ce31f4d0642 /Users/davidbenko/AndroidStudioProjects/TutorialViewSample/TutorialViewSample/build/classes/debug/com/prndl/tutorialviewsample/Arrow.class
 1369077763000 502 11b727497739cfbe786b64abed29cbdde61fb516 /Users/davidbenko/AndroidStudioProjects/TutorialViewSample/TutorialViewSample/build/classes/debug/com/prndl/tutorialviewsample/R$string.class
-1369258432000 1302 3b0f8b0d41f9a751f97b1b87a379f9076b23b139 /Users/davidbenko/AndroidStudioProjects/TutorialViewSample/TutorialViewSample/build/classes/debug/com/prndl/tutorialviewsample/TutorialView.class
+1374524702000 1302 d58d81d7318075b6f00f8e87cb59e91518dfa8cb /Users/davidbenko/AndroidStudioProjects/TutorialViewSample/TutorialViewSample/build/classes/debug/com/prndl/tutorialviewsample/TutorialView.class
 1369077763000 365 df93c4bbcb64ef3ef266105249d3f697a0d362d3 /Users/davidbenko/AndroidStudioProjects/TutorialViewSample/TutorialViewSample/build/classes/debug/com/prndl/tutorialviewsample/BuildConfig.class
 1369077763000 491 c14b3beacb935054f71b0a85c892162717c4d106 /Users/davidbenko/AndroidStudioProjects/TutorialViewSample/TutorialViewSample/build/classes/debug/com/prndl/tutorialviewsample/R$dimen.class
 1369077763000 437 a2f9df1ca65cc9f53f490af64f0722eb77c657a0 /Users/davidbenko/AndroidStudioProjects/TutorialViewSample/TutorialViewSample/build/classes/debug/com/prndl/tutorialviewsample/R$drawable.class
