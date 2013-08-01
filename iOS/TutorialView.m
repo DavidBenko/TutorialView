@@ -97,6 +97,11 @@
         return;
     };
     
+    //Remove old layers
+    for(CALayer *layer in self.layer.sublayers)
+        if([layer isMemberOfClass:[CAShapeLayer class]])
+            [layer removeFromSuperlayer];
+    
     bool drawAnimatedPath = true;
     bool drawNonAnimatedPath = true;
     
