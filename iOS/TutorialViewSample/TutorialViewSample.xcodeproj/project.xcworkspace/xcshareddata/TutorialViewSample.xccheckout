@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>FD8CC262-2AC0-4DC5-990B-04FCDE4FA1C2</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TutorialViewSample</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AB2CFBD4-3E89-4153-B442-4714D6A8C15F</key>
+		<string>ssh://github.com/DavidBenko-PRNDL/TutorialView.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>iOS/TutorialViewSample/TutorialViewSample.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AB2CFBD4-3E89-4153-B442-4714D6A8C15F</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/DavidBenko-PRNDL/TutorialView.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AB2CFBD4-3E89-4153-B442-4714D6A8C15F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AB2CFBD4-3E89-4153-B442-4714D6A8C15F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TutorialView</string>
+		</dict>
+	</array>
+</dict>
+</plist>

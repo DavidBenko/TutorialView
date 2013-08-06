@@ -65,8 +65,11 @@
 }
 - (void)generatePath {
     
-    CGMutablePathRef arrowPath = CGPathCreateMutable();
+    //Early out if invalid path
+    if(CGPointEqualToPoint(head,tail))return;
     
+    CGMutablePathRef arrowPath = CGPathCreateMutable();
+
     BOOL shouldCurve = (self.head.x == self.tail.x || self.head.y == self.tail.y) ? NO : self.curved;
     
     CGPathMoveToPoint(arrowPath, nil, self.head.x, self.head.y);
@@ -92,7 +95,7 @@
     // Compute P and Q:
     CGPoint P = CGPointMake(B.x - CB.x - CB.y, B.y - CB.y + CB.x);
     CGPoint Q = CGPointMake(B.x - CB.x + CB.y, B.y - CB.y - CB.x);
-    
+
     CGPathMoveToPoint(arrowPath, nil, self.head.x, self.head.y);
     CGPathAddLineToPoint(arrowPath, nil, P.x, P.y);
     
