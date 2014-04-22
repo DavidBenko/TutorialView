@@ -5,7 +5,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 
 import TutorialView.Arrow;
-import TutorialView.Tutorial;
+import TutorialView.TutorialView;
 
 /**
  * Created by davidbenko on 4/22/14.
@@ -16,7 +16,7 @@ public class ExampleActivity extends Activity {
     public void onCreate(Bundle data){
         super.onCreate( data );
 
-        Tutorial t = new TutorialView.Tutorial(this);
+        TutorialView t = new TutorialView(this);
         Arrow a = new Arrow();
         a.setHead(new Point(100,100));
         a.setTail(new Point(300, 300));

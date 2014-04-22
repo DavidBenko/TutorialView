@@ -12,7 +12,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-public class Tutorial extends View {
+public class TutorialView extends View {
 
 
     public static final float VIEW_ALPHA = 0.8f;
@@ -29,7 +29,7 @@ public class Tutorial extends View {
     float[] dashes = { 0.0f, Float.MAX_VALUE };
     private ArrayList<Arrow> arrows;
 
-    public Tutorial(Context context) {
+    public TutorialView(Context context) {
         super(context);
 
         this.context=context;
