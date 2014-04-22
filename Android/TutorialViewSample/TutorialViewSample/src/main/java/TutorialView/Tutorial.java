@@ -4,6 +4,7 @@ package TutorialView;
 
 import android.content.Context;
 import android.graphics.*;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -33,7 +34,7 @@ public class Tutorial extends View {
 
         this.context=context;
         this.setBackgroundColor(Color.parseColor(VIEW_COLOR));
-        this.setAlpha(VIEW_ALPHA);
+        if(Build.VERSION.SDK_INT >= 11) this.setAlpha(VIEW_ALPHA);
         this.arrows = new ArrayList<Arrow>();
         paint = new Paint();
         paint.setColor(Color.parseColor(ARROW_COLOR));
