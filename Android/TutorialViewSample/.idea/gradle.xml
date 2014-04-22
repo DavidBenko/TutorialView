@@ -3,8 +3,15 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="useAutoImport" value="true" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../gradle-1.9" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/TutorialViewSample" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>
