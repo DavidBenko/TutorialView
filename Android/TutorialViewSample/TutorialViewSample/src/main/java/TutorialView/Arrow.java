@@ -1,6 +1,6 @@
 
 
-package com.prndl.tutorialviewsample;
+package TutorialView;
 
 import android.graphics.Path;
 import android.graphics.Point;
