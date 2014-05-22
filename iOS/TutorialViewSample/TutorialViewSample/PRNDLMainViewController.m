@@ -64,6 +64,7 @@
     a.head = CGPointMake(arc4random() % 300, arc4random() % 300);
     a.tail = CGPointMake(arc4random() % 300, arc4random() % 300);
     a.curved = floorf((arc4random() % 2));
+    a.direction = floorf((arc4random() % 2));
     [self.tutorialView addArrow:a];
 }
 

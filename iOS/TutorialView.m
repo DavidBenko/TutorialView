@@ -63,7 +63,6 @@
     [super layoutSubviews];
 }
 
-
 - (CGPoint)getClosestPointInRect:(CGRect)rect toPoint:(CGPoint)point {
     CGFloat x_min = rect.origin.x;
     CGFloat y_min = rect.origin.y;
@@ -91,6 +90,7 @@
     [self generatePath];
     [self setNeedsDisplay];
 }
+
 - (void)drawPath{
     if (self.arrows.count < 1){
         NSLog(@"TutorialView No Arrows to Draw!");
@@ -106,13 +106,13 @@
     bool drawNonAnimatedPath = true;
     
     if(!CGPathIsEmpty(self.pathAnimated)){
-        if(self.delegate)
+        if([self.delegate respondsToSelector:@selector(tutorialView:shouldDrawPath:animated:)])
             drawAnimatedPath = [self.delegate tutorialView:self shouldDrawPath:(CGPathRef)self.pathAnimated animated:true];
     }
     else drawAnimatedPath = false;
             
     if(!CGPathIsEmpty(self.pathNoAnimation)){
-        if(self.delegate)
+        if([self.delegate respondsToSelector:@selector(tutorialView:shouldDrawPath:animated:)])
             drawNonAnimatedPath = [self.delegate tutorialView:self shouldDrawPath:(CGPathRef)self.pathNoAnimation animated:false];
     }
     else drawNonAnimatedPath = false;
@@ -138,7 +138,8 @@
         pathAnimation.toValue = [NSNumber numberWithFloat:1.0f];
         [pathLayer addAnimation:pathAnimation forKey:@"strokeEnd"];
         
-        if(self.delegate) [self.delegate tutorialView:self didDrawPath:(CGPathRef)self.pathAnimated];
+        if([self.delegate respondsToSelector:@selector(tutorialView:didDrawPath:)])
+            [self.delegate tutorialView:self didDrawPath:(CGPathRef)self.pathAnimated];
     }
     
     if(drawNonAnimatedPath){
@@ -156,7 +157,8 @@
         pathLayer.lineJoin = kCALineJoinBevel;
         [self.layer addSublayer:pathLayer];
         
-        if(self.delegate) [self.delegate tutorialView:self didDrawPath:(CGPathRef)self.pathNoAnimation];
+        if([self.delegate respondsToSelector:@selector(tutorialView:didDrawPath:)])
+            [self.delegate tutorialView:self didDrawPath:(CGPathRef)self.pathNoAnimation];
     }
     
 }
@@ -171,13 +173,16 @@
     self.pathAnimated = pAnimated;
     self.pathNoAnimation = pNoAnimated;
 }
+
 - (void)dismissView{
     [self dismissViewAnimated:YES completion:nil];
 }
+
 - (void)dismissViewAnimated:(BOOL)animated completion:(void(^)(void))callback{
     bool shouldAnimate = animated;
     bool shouldDismiss = true;
-    if (self.delegate)shouldDismiss = [self.delegate tutorialView:self shouldDismissAnimated:&shouldAnimate];
+    if ([self.delegate respondsToSelector:@selector(tutorialView:shouldDismissAnimated:)])
+        shouldDismiss = [self.delegate tutorialView:self shouldDismissAnimated:&shouldAnimate];
     if (!shouldDismiss) return;
     
     if(shouldAnimate){
@@ -190,19 +195,21 @@
                          completion:^(BOOL success){
                             [self removeFromSuperview];
                             if(callback) callback();
-                            if(self.delegate)[self.delegate tutorialView:self didDismissAnimated:animated];
+                            if([self.delegate respondsToSelector:@selector(tutorialView:didDismissAnimated:)])
+                                [self.delegate tutorialView:self didDismissAnimated:animated];
                          }
          ];
     }
     else{
         [self removeFromSuperview];
         if(callback) callback();
-        if(self.delegate)[self.delegate tutorialView:self didDismissAnimated:animated];
+        if([self.delegate respondsToSelector:@selector(tutorialView:didDismissAnimated:)])
+            [self.delegate tutorialView:self didDismissAnimated:animated];
     }
 }
 
-
 #pragma mark - Dealloc
+
 -(void)dealloc {
     CGPathRelease(self.pathAnimated);
     CGPathRelease(self.pathNoAnimation);

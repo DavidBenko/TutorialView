@@ -27,6 +27,12 @@
 
 #define ARROW_HEAD_LENGTH(arrowLen) arrowLen / 8.5f
 
+enum ArrowDirection {
+    ArrowDirectionHT,   // Draw arrow head to tail (default)
+    ArrowDirectionTH    // Draw arrow tail to head
+};
+typedef enum ArrowDirection ArrowDirection;
+
 @interface Arrow : NSObject
 
 @property (nonatomic, assign) CGPoint head;
@@ -35,5 +41,6 @@
 @property (nonatomic, assign) BOOL animated;
 @property (nonatomic, strong) NSString *description;
 @property (nonatomic, assign) CGMutablePathRef path;
+@property (nonatomic, assign) ArrowDirection direction;
 
 @end

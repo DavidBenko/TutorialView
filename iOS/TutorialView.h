@@ -26,11 +26,11 @@
 #import <CoreText/CoreText.h>
 #import "Arrow.h"
 
-#define VIEW_ALPHA 0.8f
+#define VIEW_ALPHA 0.7f
 #define VIEW_COLOR [UIColor blackColor]
-#define LINE_WIDTH 3.
+#define LINE_WIDTH 1.
 #define ARROW_COLOR [[UIColor whiteColor] CGColor]
-#define DRAW_ANIMATION_SPEED 0.4f
+#define DRAW_ANIMATION_SPEED 0.3f
 #define DISMISS_ANIMATION_SPEED 0.5f
 #define TIP_FRAME_PADDING 15.
 #define IOS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]

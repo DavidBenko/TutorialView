@@ -30,6 +30,7 @@
 @synthesize description;
 @synthesize path;
 
+#pragma mark - Lifecycle
 
 - (id) init
 {
@@ -41,28 +42,49 @@
         self.curved = true;
         self.animated = true;
         self.description = @"";
+        self.direction=ArrowDirectionHT;
         self.path = CGPathCreateMutable();
     }
     return self;
 }
+
+-(void)dealloc {
+    CGPathRelease(self.path);
+}
+
+#pragma mark - Setter methods
+
 - (void)setHead:(CGPoint)point{
     head = point;
     [self generatePath];
 }
+
 - (void)setHeadWithX:(CGFloat)x andY:(CGFloat)y {
     self.head = CGPointMake(x, y);
 }
+
 - (void)setTail:(CGPoint)point{
     tail = point;
     [self generatePath];
 }
+
 - (void)setTailWithX:(CGFloat)x andY:(CGFloat)y {
     self.tail = CGPointMake(x, y);
 }
+
 - (void)setCurved:(BOOL)shouldCurve {
     curved = shouldCurve;
     [self generatePath];
 }
+
+-(void)setDirection:(ArrowDirection)drawDirection
+{
+    _direction=drawDirection;
+    [self generatePath];
+}
+
+#pragma mark - Draw methods
+
 - (void)generatePath {
     
     //Early out if invalid path
@@ -71,10 +93,18 @@
     CGMutablePathRef arrowPath = CGPathCreateMutable();
 
     BOOL shouldCurve = (self.head.x == self.tail.x || self.head.y == self.tail.y) ? NO : self.curved;
-    
-    CGPathMoveToPoint(arrowPath, nil, self.head.x, self.head.y);
-    if(shouldCurve)CGPathAddQuadCurveToPoint(arrowPath, nil, self.head.x, self.tail.y, self.tail.x, self.tail.y);
-    else CGPathAddLineToPoint(arrowPath, nil, self.tail.x, self.tail.y);
+    if (self.direction==ArrowDirectionHT) {
+        CGPathMoveToPoint(arrowPath, nil, self.head.x, self.head.y);
+        if(shouldCurve)
+            CGPathAddQuadCurveToPoint(arrowPath, nil, self.head.x, self.tail.y, self.tail.x, self.tail.y);
+        else CGPathAddLineToPoint(arrowPath, nil, self.tail.x, self.tail.y);
+    }else
+    {
+        CGPathMoveToPoint(arrowPath, nil, self.tail.x, self.tail.y);
+        if(shouldCurve)
+            CGPathAddQuadCurveToPoint(arrowPath, nil, self.head.x, self.tail.y, self.head.x, self.head.y);
+        else CGPathAddLineToPoint(arrowPath, nil, self.head.x, self.head.y);
+    }
     
     //Calculate Arrow Head
     CGPoint A = shouldCurve ? CGPointMake(self.head.x, self.tail.y) : self.tail;
@@ -106,8 +136,4 @@
     self.path = arrowPath;
 }
 
-#pragma mark - Dealloc
--(void)dealloc {
-    CGPathRelease(self.path);
-}
 @end
